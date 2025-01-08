@@ -1,0 +1,74 @@
+E:\maze en consola\LaberintoJuego\bin\Debug\net7.0\LaberintoJuego.exe
+E:\maze en consola\LaberintoJuego\bin\Debug\net7.0\LaberintoJuego.deps.json
+E:\maze en consola\LaberintoJuego\bin\Debug\net7.0\LaberintoJuego.runtimeconfig.json
+E:\maze en consola\LaberintoJuego\bin\Debug\net7.0\LaberintoJuego.dll
+E:\maze en consola\LaberintoJuego\bin\Debug\net7.0\LaberintoJuego.pdb
+E:\maze en consola\LaberintoJuego\bin\Debug\net7.0\Spectre.Console.dll
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.csproj.AssemblyReference.cache
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.GeneratedMSBuildEditorConfig.editorconfig
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.AssemblyInfoInputs.cache
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.AssemblyInfo.cs
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.csproj.CoreCompileInputs.cache
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.csproj.CopyComplete
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.dll
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\refint\LaberintoJuego.dll
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.pdb
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\LaberintoJuego.genruntimeconfig.cache
+E:\maze en consola\LaberintoJuego\obj\Debug\net7.0\ref\LaberintoJuego.dll
+E:\maze en consola\LaberintoJuego 1.2\bin\Debug\net7.0\LaberintoJuego.exe
+E:\maze en consola\LaberintoJuego 1.2\bin\Debug\net7.0\LaberintoJuego.deps.json
+E:\maze en consola\LaberintoJuego 1.2\bin\Debug\net7.0\LaberintoJuego.runtimeconfig.json
+E:\maze en consola\LaberintoJuego 1.2\bin\Debug\net7.0\LaberintoJuego.dll
+E:\maze en consola\LaberintoJuego 1.2\bin\Debug\net7.0\LaberintoJuego.pdb
+E:\maze en consola\LaberintoJuego 1.2\bin\Debug\net7.0\Spectre.Console.dll
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.csproj.AssemblyReference.cache
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.GeneratedMSBuildEditorConfig.editorconfig
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.AssemblyInfoInputs.cache
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.AssemblyInfo.cs
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.csproj.CoreCompileInputs.cache
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.csproj.CopyComplete
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.dll
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\refint\LaberintoJuego.dll
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.pdb
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\LaberintoJuego.genruntimeconfig.cache
+E:\maze en consola\LaberintoJuego 1.2\obj\Debug\net7.0\ref\LaberintoJuego.dll
+E:\maze en consola\LaberintoJuego 1.2\bin\Debug\net7.0\SixLabors.ImageSharp.dll
+E:\maze en consola\LaberintoJuego 1.2\bin\Debug\net7.0\Spectre.Console.ImageSharp.dll
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.csproj.AssemblyReference.cache
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.GeneratedMSBuildEditorConfig.editorconfig
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.AssemblyInfoInputs.cache
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.AssemblyInfo.cs
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.csproj.CoreCompileInputs.cache
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.dll
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\refint\LaberintoJuego.dll
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.pdb
+E:\maze en consola\laberinto todo menos efectos bien 1.3\bin\Debug\net7.0\LaberintoJuego.exe
+E:\maze en consola\laberinto todo menos efectos bien 1.3\bin\Debug\net7.0\LaberintoJuego.deps.json
+E:\maze en consola\laberinto todo menos efectos bien 1.3\bin\Debug\net7.0\LaberintoJuego.runtimeconfig.json
+E:\maze en consola\laberinto todo menos efectos bien 1.3\bin\Debug\net7.0\LaberintoJuego.dll
+E:\maze en consola\laberinto todo menos efectos bien 1.3\bin\Debug\net7.0\LaberintoJuego.pdb
+E:\maze en consola\laberinto todo menos efectos bien 1.3\bin\Debug\net7.0\SixLabors.ImageSharp.dll
+E:\maze en consola\laberinto todo menos efectos bien 1.3\bin\Debug\net7.0\Spectre.Console.dll
+E:\maze en consola\laberinto todo menos efectos bien 1.3\bin\Debug\net7.0\Spectre.Console.ImageSharp.dll
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.csproj.CopyComplete
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\LaberintoJuego.genruntimeconfig.cache
+E:\maze en consola\laberinto todo menos efectos bien 1.3\obj\Debug\net7.0\ref\LaberintoJuego.dll
+E:\maze en consola\version subida\bin\Debug\net7.0\LaberintoJuego.exe
+E:\maze en consola\version subida\bin\Debug\net7.0\LaberintoJuego.deps.json
+E:\maze en consola\version subida\bin\Debug\net7.0\LaberintoJuego.runtimeconfig.json
+E:\maze en consola\version subida\bin\Debug\net7.0\LaberintoJuego.dll
+E:\maze en consola\version subida\bin\Debug\net7.0\LaberintoJuego.pdb
+E:\maze en consola\version subida\bin\Debug\net7.0\SixLabors.ImageSharp.dll
+E:\maze en consola\version subida\bin\Debug\net7.0\Spectre.Console.dll
+E:\maze en consola\version subida\bin\Debug\net7.0\Spectre.Console.ImageSharp.dll
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.csproj.AssemblyReference.cache
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.GeneratedMSBuildEditorConfig.editorconfig
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.AssemblyInfoInputs.cache
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.AssemblyInfo.cs
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.csproj.CoreCompileInputs.cache
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.csproj.CopyComplete
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.dll
+E:\maze en consola\version subida\obj\Debug\net7.0\refint\LaberintoJuego.dll
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.pdb
+E:\maze en consola\version subida\obj\Debug\net7.0\LaberintoJuego.genruntimeconfig.cache
+E:\maze en consola\version subida\obj\Debug\net7.0\ref\LaberintoJuego.dll

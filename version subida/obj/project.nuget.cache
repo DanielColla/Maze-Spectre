@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZTpELzAExLYXrDnPaiFqka5Pryl1q3GROlQUT/u4un3an91657c9sgXzHyz2/WVRaJU/LJC8OuwgQq56RCQUZQ==",
+  "success": true,
+  "projectFilePath": "E:\\maze en consola\\version subida\\LaberintoJuego.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Daniel Collazo\\.nuget\\packages\\sixlabors.imagesharp\\3.1.4\\sixlabors.imagesharp.3.1.4.nupkg.sha512",
+    "C:\\Users\\Daniel Collazo\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512",
+    "C:\\Users\\Daniel Collazo\\.nuget\\packages\\spectre.console.imagesharp\\0.49.1\\spectre.console.imagesharp.0.49.1.nupkg.sha512"
+  ],
+  "logs": []
+}
