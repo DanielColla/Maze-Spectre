@@ -1,0 +1,24 @@
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.csproj.AssemblyReference.cache
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.GeneratedMSBuildEditorConfig.editorconfig
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.AssemblyInfoInputs.cache
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.AssemblyInfo.cs
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.csproj.CoreCompileInputs.cache
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\proyecto separado.exe
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\proyecto separado.deps.json
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\proyecto separado.runtimeconfig.json
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\proyecto separado.dll
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\proyecto separado.pdb
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\Spectre.Console.dll
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.csproj.CopyComplete
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.dll
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\refint\proyecto separado.dll
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.pdb
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\proyecto separado.genruntimeconfig.cache
+E:\maze en consola\proyecto separado\obj\Debug\net7.0\ref\proyecto separado.dll
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\System.Drawing.Common.dll
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\System.Windows.Extensions.dll
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\maze en consola\proyecto separado\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll

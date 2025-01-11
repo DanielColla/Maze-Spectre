@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "tJHxmnodqxvORzu0Ktfp4n0/tgyN7quuwvUmppOM6alnvfOZoa9ptINtG/kiEb3x8WQfT/w0gdL1DHapsrrpgw==",
+  "success": true,
+  "projectFilePath": "E:\\maze en consola\\proyecto separado\\proyecto separado.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Daniel Collazo\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\Daniel Collazo\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Daniel Collazo\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512",
+    "C:\\Users\\Daniel Collazo\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Users\\Daniel Collazo\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
