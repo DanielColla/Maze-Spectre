@@ -8,7 +8,7 @@ class Logica
     public static int[,] maze = GameManager.maze;
     public static List<Trap> traps = GameManager.traps;
     public static List<Trap> swapTraps = GameManager.swapTraps;
-    public static List<Trap> stunTraps = GameManager.stunTraps;
+    public static List<Trap> knockbackTraps = GameManager.knockbackTraps;
 
     public static void InitializeMaze()
     {
@@ -108,23 +108,29 @@ class Logica
         }
     }
 
-    public static void PlaceStunTraps()
-    {
-        Random rand = new Random();
-        int trapCount = 2;
+ 
 
-        for (int i = 0; i < trapCount; i++)
+
+
+
+public static void PlaceKnockbackTraps() // Añade esta función
+{
+    Random rand = new Random();
+    int trapCount = 2;
+
+    for (int i = 0; i < trapCount; i++)
+    {
+        int trapX, trapY;
+        do
         {
-            int trapX, trapY;
-            do
-            {
-                trapX = rand.Next(1, width - 1);
-                trapY = rand.Next(1, height - 1);
-            } while (maze[trapY, trapX] != 0 || (trapX == width - 2 && trapY == height - 2) || traps.Exists(t => t.Position == (trapX, trapY)) || swapTraps.Exists(t => t.Position == (trapX, trapY)));
-            
-            stunTraps.Add(new Trap(trapX, trapY));
-        }
+            trapX = rand.Next(1, width - 1);
+            trapY = rand.Next(1, height - 1);
+        } while (maze[trapY, trapX] != 0 || (trapX == width - 2 && trapY == width - 2) || traps.Exists(t => t.Position == (trapX, trapY)) || swapTraps.Exists(t => t.Position == (trapX, trapY)));
+
+        knockbackTraps.Add(new Trap(trapX, trapY));
     }
+}
+
 
     public static void MoveAIPlayerTowardsExit(ref int playerX, ref int playerY)
     {

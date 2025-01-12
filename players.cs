@@ -88,7 +88,7 @@ public class Player
             {
                 trapX = rand.Next(1, GameManager.width - 1);
                 trapY = rand.Next(1, GameManager.height - 1);
-            } while (GameManager.maze[trapY, trapX] != 0 || GameManager.traps.Exists(t => t.Position == (trapX, trapY)) || GameManager.swapTraps.Exists(t => t.Position == (trapX, trapY)) || GameManager.stunTraps.Exists(t => t.Position == (trapX, trapY)));
+            } while (GameManager.maze[trapY, trapX] != 0 || GameManager.traps.Exists(t => t.Position == (trapX, trapY)) || GameManager.swapTraps.Exists(t => t.Position == (trapX, trapY)) || GameManager.knockbackTraps.Exists(t => t.Position == (trapX, trapY)));
 
             GameManager.traps.Add(new Trap(trapX, trapY));
         }

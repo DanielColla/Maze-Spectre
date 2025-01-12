@@ -12,7 +12,9 @@ class GameManager
     public static int[,] maze = new int[height, width];
     public static List<Trap> traps = new List<Trap>();
     public static List<Trap> swapTraps = new List<Trap>();
-    public static List<Trap> stunTraps = new List<Trap>();
+   
+public static List<Trap> knockbackTraps = new List<Trap>();
+
     public static int player1StunTurns = 0;
     public static int player2StunTurns = 0;
     public static bool isAIPlayer2 = false;
@@ -42,7 +44,7 @@ class GameManager
 
         Logica.PlaceTraps();
         Logica.PlaceSwapTraps();
-        Logica.PlaceStunTraps();
+        Logica.PlaceKnockbackTraps();
         StartGame();
     }
 static void ShowPlayerSelectionMenu()
@@ -153,26 +155,29 @@ static void ShowPlayerSelectionMenu()
         if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter) return;
     }
 
-        static void StartGame()
+     static void StartGame()
+{
+    StopSound(); // Detener la música del menú 
+    PlaySound(@"E:\maze en consola\sounds\sound_game.wav");
+    Random rand = new Random();
+    int player1X, player1Y, player2X, player2Y;
+
+    // Definir la distancia mínima a la salida
+    int minDistanceToExit = 3;
+
+    do
     {
-        StopSound(); // Detener la música del menú 
-        PlaySound(@"E:\maze en consola\sounds\sound_game.wav");
-        Random rand = new Random();
-        int player1X, player1Y, player2X, player2Y;
+        player1X = rand.Next(1, width - 1);
+        player1Y = rand.Next(1, height - 1);
+    } while (maze[player1Y, player1X] != 0 || IsNearExit(player1X, player1Y, minDistanceToExit));
 
-        do
-        {
-            player1X = rand.Next(1, width - 1);
-            player1Y = rand.Next(1, height - 1);
-        } while (maze[player1Y, player1X] != 0);
+    do
+    {
+        player2X = rand.Next(1, width - 1);
+        player2Y = rand.Next(1, height - 1);
+    } while (maze[player2Y, player2X] != 0 || (player2X == player1X && player2Y == player1Y) || IsNearExit(player2X, player2Y, minDistanceToExit));
 
-        do
-        {
-            player2X = rand.Next(1, width - 1);
-            player2Y = rand.Next(1, height - 1);
-        } while (maze[player2Y, player2X] != 0 || (player2X == player1X && player2Y == player1Y));
-
-        int turns = 2;
+    int turns = 2;
 
         while (true)
         {
@@ -211,7 +216,9 @@ static void ShowPlayerSelectionMenu()
                         if (key == ConsoleKey.A && player1X > 0 && maze[player1Y, player1X - 1] == 0) player1X--;
                         if (key == ConsoleKey.D && player1X < width - 1 && maze[player1Y, player1X + 1] == 0) player1X++;
                     }
-                    Trap.ActivateTrap(ref player1X, ref player1Y, ref player2X, ref player2Y, rand, ref player1StunTurns, selectedPlayer1);
+                  Trap.ActivateTrap(ref player1X, ref player1Y, ref player2X, ref player2Y, rand, selectedPlayer1); // Actualizar esta línea
+
+
                 }
             }
             else // Turno del Jugador 2
@@ -245,7 +252,7 @@ static void ShowPlayerSelectionMenu()
                             if (key == ConsoleKey.A && player2X > 0 && maze[player2Y, player2X - 1] == 0) player2X--;
                             if (key == ConsoleKey.D && player2X < width - 1 && maze[player2Y, player2X + 1] == 0) player2X++;
                         }
-                        Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, ref player2StunTurns, selectedPlayer2);
+                       Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2); // Actualizar esta línea
                     }
                 }
                 else // Jugador 2 controlado por la IA
@@ -253,7 +260,7 @@ static void ShowPlayerSelectionMenu()
                     if (player2StunTurns == 0)
                     {
                         Logica.MoveAIPlayerTowardsExit(ref player2X, ref player2Y);
-                        Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, ref player2StunTurns, selectedPlayer2);
+                        Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2);
                     }
                 }
             }
@@ -295,7 +302,12 @@ static void ShowPlayerSelectionMenu()
             turns++;
         }
     }
-
+static bool IsNearExit(int x, int y, int minDistance) 
+   { 
+    int exitX = width - 2;
+    int exitY = height - 2; 
+        return Math.Abs(x - exitX) < minDistance && Math.Abs(y - exitY) < minDistance;
+     }
     static void PrintMazeWithPlayers(int player1X, int player1Y, int player2X, int player2Y)
     {
         AnsiConsole.Write(new FigletText("Laberinto del Juego").Color(Color.Aqua).Centered());
@@ -323,8 +335,9 @@ static void ShowPlayerSelectionMenu()
                     row.Add(new Markup("[bold magenta]T[/]")); // Trampa normal
                 else if (swapTraps.Exists(t => t.Position == (j, i)))
                     row.Add(new Markup("[bold cyan]X[/]")); // Trampa de cambio de posición
-                else if (stunTraps.Exists(t => t.Position == (j, i)))
-                    row.Add(new Markup("[bold red]Z[/]")); // Trampa de estupor
+                else if (knockbackTraps.Exists(t => t.Position == (j, i))) // Añade esta línea
+                    row.Add(new Markup("[bold red]K[/]")); // Añade esta línea
+
                 else if (maze[i, j] == 1)
                     row.Add(new Markup("[red]█[/]")); // Pared
                 else

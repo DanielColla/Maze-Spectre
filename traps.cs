@@ -10,8 +10,7 @@ class Trap
         Position = (x, y);
     }
 
-    // efectos de las trampas
-    public static void ActivateTrap(ref int playerX, ref int playerY, ref int otherPlayerX, ref int otherPlayerY, Random rand, ref int playerStunTurns, Player player)
+    public static void ActivateTrap(ref int playerX, ref int playerY, ref int otherPlayerX, ref int otherPlayerY, Random rand, Player player)
     {
         var playerPosition = (playerX, playerY);
 
@@ -33,12 +32,47 @@ class Trap
             return;
         }
 
-        // Trampa de estupor: aplicar estupor
-        var stunTrap = GameManager.stunTraps.Find(t => t.Position == playerPosition);
-        if (stunTrap != null)
+        // Trampa de retroceso: mover al jugador 3 pasos hacia atrás
+        var knockbackTrap = GameManager.knockbackTraps.Find(t => t.Position == playerPosition);
+        if (knockbackTrap != null)
         {
-            playerStunTurns = 2; // Asegúrate de establecer los turnos de estupor directamente aquí
-            GameManager.stunTraps.Remove(stunTrap);
+            MoveBackwards(ref playerX, ref playerY, 3);
+            GameManager.knockbackTraps.Remove(knockbackTrap);
+            return;
         }
+    }
+
+    static void MoveBackwards(ref int playerX, ref int playerY, int steps)
+    {
+        // Lógica para mover al jugador hacia atrás de manera óptima.
+        // La dirección del movimiento se ajustará según la posición actual del jugador.
+        // Supongamos que moverse hacia atrás significa moverse en la dirección opuesta de la entrada del laberinto.
+
+        // Determinar la nueva posición basada en los pasos dados hacia atrás.
+        for (int i = 0; i < steps; i++)
+        {
+            if (IsValidMove(playerX, playerY - 1)) // Intentar moverse hacia arriba
+            {
+                playerY -= 1;
+            }
+            else if (IsValidMove(playerX - 1, playerY)) // Si no puede, intentar moverse hacia la izquierda
+            {
+                playerX -= 1;
+            }
+            else if (IsValidMove(playerX + 1, playerY)) // Si no puede, intentar moverse hacia la derecha
+            {
+                playerX += 1;
+            }
+            else if (IsValidMove(playerX, playerY + 1)) // Si no puede, intentar moverse hacia abajo
+            {
+                playerY += 1;
+            }
+        }
+    }
+
+    static bool IsValidMove(int x, int y)
+    {
+        // Verifica si la nueva posición está dentro de los límites del laberinto y no es una pared.
+        return x >= 0 && x < GameManager.width && y >= 0 && y < GameManager.height && GameManager.maze[y, x] == 0;
     }
 }
