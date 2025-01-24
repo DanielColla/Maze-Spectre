@@ -130,9 +130,53 @@ public static void PlaceKnockbackTraps() // Añade esta función
         knockbackTraps.Add(new Trap(trapX, trapY));
     }
 }
+public static bool iaWaiting = false; // Indica si la IA está esperando
+public static bool iaCanWin = false; // Indica si la IA puede moverse a la salida
 
+public static void MoveAIPlayerTowardsExit(ref int playerX, ref int playerY, int player1X, int player1Y)
+{
+    // Si la IA está esperando, verifica si el jugador llegó primero
+    if (iaWaiting)
+    {
+        if (player1X == width - 2 && player1Y == height - 2)
+        {
+            // El jugador 1 llegó primero, la IA no gana
+            iaWaiting = false;
+            iaCanWin = false;
+            return;
+        }
 
-    public static void MoveAIPlayerTowardsExit(ref int playerX, ref int playerY)
+        // Si la IA puede ganar, se mueve a la salida
+        iaWaiting = false;
+        iaCanWin = true;
+    }
+
+    // Verifica si la IA está a un paso de la salida
+    var path = FindPath(playerX, playerY, width - 2, height - 2);
+    if (path != null && path.Count == 2) // Un paso de distancia
+    {
+        if (!iaWaiting && !iaCanWin)
+        {
+            iaWaiting = true; // La IA decide esperar un turno
+            return;
+        }
+    }
+
+    // Movimiento normal si no está esperando o si puede ganar
+    if (path != null && path.Count > 1)
+    {
+        playerX = path[1].Item1;
+        playerY = path[1].Item2;
+    }
+
+    // Si la IA alcanza la salida, gana
+    if (playerX == width - 1 && playerY == height - 1)
+    {
+        Console.WriteLine("¡El Demonio salio del laberinto!");
+    }
+}
+
+   /* public static void MoveAIPlayerTowardsExit(ref int playerX, ref int playerY)
     {
         var path = FindPath(playerX, playerY, width - 2, height - 2);
         if (path != null && path.Count > 1)
@@ -140,7 +184,7 @@ public static void PlaceKnockbackTraps() // Añade esta función
             playerX = path[1].Item1;
             playerY = path[1].Item2;
         }
-    }
+    }*/
 
     public static List<(int, int)> FindPath(int startX, int startY, int goalX, int goalY)
     {

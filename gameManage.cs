@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Spectre.Console;
@@ -39,6 +39,7 @@ public static List<Trap> knockbackTraps = new List<Trap>();
         do
         {
             Logica.InitializeMaze();
+           
             Logica.GenerateMaze(1, 1);
         } while (!Logica.IsSolvable());
 
@@ -49,7 +50,7 @@ public static List<Trap> knockbackTraps = new List<Trap>();
     }
 static void ShowPlayerSelectionMenu()
 {
-    PlaySound(@"E:\maze en consola\sounds\sound_main_menu.wav");
+  //  PlaySound(@"E:\maze en consola\sounds\sound_main_menu.wav");
     AnsiConsole.Write(new FigletText("Menu de Seleccion").Centered().Color(Color.Aqua));
 
     selectedPlayer1 = AnsiConsole.Prompt(
@@ -81,13 +82,12 @@ static void ShowPlayerSelectionMenu()
                     .UseConverter(player => $"{player.Name} - {player.PowerDescription}")
                     .AddChoices(players));
         }
-
-        AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selectedPlayer2.Name}[/]\n{selectedPlayer2.PowerDescription}")
+AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selectedPlayer2.Name}[/]\n{selectedPlayer2.PowerDescription}")
             .Border(BoxBorder.Double).BorderColor(Color.Grey).Header("[bold blue]Jugador 2[/]"));
     }
     else
     {
-        selectedPlayer2 = new Player("IA", "Controlado por la IA", "Jugador controlado por la IA.");
+        selectedPlayer2 = new Player("IA", "Controlado por un spiritu maligno", "Jugador controlado por un spiritu , el jugador se mueve dos casillas.");
         AnsiConsole.Write(new Panel($"Segundo jugador: [bold blue]{selectedPlayer2.Name}[/]\n{selectedPlayer2.PowerDescription}")
             .Border(BoxBorder.Double).BorderColor(Color.Grey).Header("[bold blue]Jugador 2[/]"));
     }
@@ -157,8 +157,8 @@ static void ShowPlayerSelectionMenu()
 
      static void StartGame()
 {
-    StopSound(); // Detener la música del menú 
-    PlaySound(@"E:\maze en consola\sounds\sound_game.wav");
+   /* StopSound(); // Detener la música del menú 
+    PlaySound(@"E:\maze en consola\sounds\sound_game.wav");*/
     Random rand = new Random();
     int player1X, player1Y, player2X, player2Y;
 
@@ -177,9 +177,8 @@ static void ShowPlayerSelectionMenu()
         player2Y = rand.Next(1, height - 1);
     } while (maze[player2Y, player2X] != 0 || (player2X == player1X && player2Y == player1Y) || IsNearExit(player2X, player2Y, minDistanceToExit));
 
-    int turns = 2;
-
-        while (true)
+    int turns = 0;
+    while (true)
         {
             Console.Clear();
             PrintMazeWithPlayers(player1X, player1Y, player2X, player2Y);
@@ -255,11 +254,11 @@ static void ShowPlayerSelectionMenu()
                        Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2); // Actualizar esta línea
                     }
                 }
-                else // Jugador 2 controlado por la IA
+                else if ( turns % 2 != 0)// Jugador 2 controlado por la IA
                 {
                     if (player2StunTurns == 0)
                     {
-                        Logica.MoveAIPlayerTowardsExit(ref player2X, ref player2Y);
+                        Logica.MoveAIPlayerTowardsExit(ref player2X, ref player2Y, width -1, height -1);
                         Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2);
                     }
                 }
@@ -267,14 +266,14 @@ static void ShowPlayerSelectionMenu()
 
             if (player1X == width - 2 && player1Y == height - 2)
             {
-                StopSound(); // Detener la música del juego 
-                PlaySound(@"E:\maze en consola\sounds\sound_victory.wav");
+              /*  StopSound(); // Detener la música del juego 
+                PlaySound(@"E:\maze en consola\sounds\sound_victory.wav");*/
                 Console.Clear();
-                AnsiConsole.MarkupLine("[yellow bold]******************************[/]");
+                AnsiConsole.MarkupLine("[yellow bold]******[/]");
                 AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
                 AnsiConsole.MarkupLine("[yellow bold]*[/] [green bold] ¡Jugador 1 gana! [/][yellow bold]*[/]");
                 AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
-                AnsiConsole.MarkupLine("[yellow bold]******************************[/]");
+                AnsiConsole.MarkupLine("[yellow bold]******[/]");
                 AnsiConsole.Write(new FigletText("¡Victoria!").Color(Color.Yellow).Centered());
                 AnsiConsole.Markup("\n[bold green]¡Jugador 1 ha encontrado la salida del laberinto![/]\n");
                 AnsiConsole.Markup("[bold cyan]¡Eres un verdadero maestro explorador![/]");
@@ -284,14 +283,14 @@ static void ShowPlayerSelectionMenu()
 
             if (player2X == width - 2 && player2Y == height - 2)
             {
-                StopSound(); // Detener la música del juego 
-                PlaySound(@"E:\maze en consola\sounds\sound_victory.wav");
+             /*   StopSound(); // Detener la música del juego 
+                PlaySound(@"E:\maze en consola\sounds\sound_victory.wav");*/
                 Console.Clear();
-                AnsiConsole.MarkupLine("[yellow bold]******************************[/]");
+                AnsiConsole.MarkupLine("[yellow bold]******[/]");
                 AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
                 AnsiConsole.MarkupLine("[yellow bold]*[/] [green bold] ¡Jugador 2 gana! [/][yellow bold]*[/]");
                 AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
-                AnsiConsole.MarkupLine("[yellow bold]******************************[/]");
+                AnsiConsole.MarkupLine("[yellow bold]******[/]");
                 AnsiConsole.Write(new FigletText("¡Victoria!").Color(Color.Yellow).Centered());
                 AnsiConsole.Markup("\n[bold green]¡Jugador 2 ha encontrado la salida del laberinto![/]\n");
                 AnsiConsole.Markup("[bold cyan]¡Eres un verdadero maestro explorador![/]");
@@ -332,7 +331,7 @@ static bool IsNearExit(int x, int y, int minDistance)
                 else if (i == height - 2 && j == width - 2)
                     row.Add(new Markup("[bold green]S[/]")); // Salida
                 else if (traps.Exists(t => t.Position == (j, i)))
-                    row.Add(new Markup("[bold magenta]T[/]")); // Trampa normal
+                row.Add(new Markup("[bold magenta]T[/]")); // Trampa normal
                 else if (swapTraps.Exists(t => t.Position == (j, i)))
                     row.Add(new Markup("[bold cyan]X[/]")); // Trampa de cambio de posición
                 else if (knockbackTraps.Exists(t => t.Position == (j, i))) // Añade esta línea
@@ -383,7 +382,7 @@ static bool IsNearExit(int x, int y, int minDistance)
         _ => string.Empty,
     };
 }
-static void PlaySound(string soundPath)
+/*static void PlaySound(string soundPath)
 {
     SoundPlayer player = new SoundPlayer(soundPath);
     player.PlayLooping(); // Reproduce la música en bucle
@@ -392,6 +391,6 @@ static void StopSound()
 {
     SoundPlayer player = new SoundPlayer();
     player.Stop();
-}
+}*/
 
 }
