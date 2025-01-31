@@ -43,7 +43,9 @@ Cada una de estas habilidades puede usarse un máximo de tres veces.
 4. Los jugadores pueden usar sus habilidades especiales estratégicamente para avanzar o afectar a sus oponentes.  
 
 ## 💻 Requisitos  
-- **C#** (para modificar o mejorar los scripts y ejecutarlo en la consola de cualquier editor de código).  
+- **C#** (para modificar o mejorar los scripts y ejecutarlo en la consola de cualquier editor de código).
+- **dotnet add package Spectre.Console**  agregar este comando para bajar la libreria de Spectre 
+
 
 ## 🚀 Notas adicionales  
 Este proyecto está en desarrollo y se planea agregar más tipos de trampas, efectos de habilidades y mejoras en la IA para una mejor experiencia de juego.  
