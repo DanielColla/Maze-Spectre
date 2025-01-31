@@ -155,9 +155,9 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
         if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter) return;
     }
 
-     static void StartGame()
+   static void StartGame()
 {
-   /* StopSound(); // Detener la música del menú 
+    /* StopSound(); // Detener la música del menú 
     PlaySound(@"E:\maze en consola\sounds\sound_game.wav");*/
     Random rand = new Random();
     int player1X, player1Y, player2X, player2Y;
@@ -179,128 +179,137 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
 
     int turns = 0;
     while (true)
+    {
+        Console.Clear();
+        PrintMazeWithPlayers(player1X, player1Y, player2X, player2Y);
+
+        if (player1StunTurns > 0) player1StunTurns--;
+        if (player2StunTurns > 0) player2StunTurns--;
+
+        if (turns % 2 == 0) // Turno del Jugador 1
         {
-            Console.Clear();
-            PrintMazeWithPlayers(player1X, player1Y, player2X, player2Y);
-
-            if (player1StunTurns > 0) player1StunTurns--;
-            if (player2StunTurns > 0) player2StunTurns--;
-
-            if (turns % 2 == 0) // Turno del Jugador 1
+            if (player1StunTurns == 0) // Verifica si el jugador 1 no está aturdido
             {
-                if (player1StunTurns == 0) // Verifica si el jugador 1 no está aturdido
+                var key = Console.ReadKey(true).Key;
+
+                if (key == ConsoleKey.T)
+                {
+                    selectedPlayer1.TeleportTowardsExit(ref player1X, ref player1Y, width - 2, height - 2);
+                }
+                else if (key == ConsoleKey.B)
+                {
+                    selectedPlayer1.SwapPositions(ref player1X, ref player1Y, ref player2X, ref player2Y);
+                }
+                else if (key == ConsoleKey.R)
+                {
+                    selectedPlayer1.StunOtherPlayer(ref player2StunTurns);
+                }
+                else if (key == ConsoleKey.P)
+                {
+                    selectedPlayer1.PlaceRandomTrap(rand);
+                }
+                else
+                {
+                    if (key == ConsoleKey.W && player1Y > 0 && maze[player1Y - 1, player1X] == 0) player1Y--;
+                    if (key == ConsoleKey.S && player1Y < height - 1 && maze[player1Y + 1, player1X] == 0) player1Y++;
+                    if (key == ConsoleKey.A && player1X > 0 && maze[player1Y, player1X - 1] == 0) player1X--;
+                    if (key == ConsoleKey.D && player1X < width - 1 && maze[player1Y, player1X + 1] == 0) player1X++;
+                }
+                Trap.ActivateTrap(ref player1X, ref player1Y, ref player2X, ref player2Y, rand, selectedPlayer1); // Actualizar esta línea
+            }
+        }
+        else // Turno del Jugador 2
+        {
+            if (!isAIPlayer2) // Jugador 2 humano
+            {
+                if (player2StunTurns == 0) // Verifica si el jugador 2 no está aturdido
                 {
                     var key = Console.ReadKey(true).Key;
 
                     if (key == ConsoleKey.T)
                     {
-                        selectedPlayer1.TeleportTowardsExit(ref player1X, ref player1Y, width - 2, height - 2);
+                        selectedPlayer2.TeleportTowardsExit(ref player2X, ref player2Y, width - 2, height - 2);
                     }
                     else if (key == ConsoleKey.B)
                     {
-                        selectedPlayer1.SwapPositions(ref player1X, ref player1Y, ref player2X, ref player2Y);
+                        selectedPlayer2.SwapPositions(ref player2X, ref player2Y, ref player1X, ref player1Y);
                     }
                     else if (key == ConsoleKey.R)
                     {
-                        selectedPlayer1.StunOtherPlayer(ref player2StunTurns);
+                        selectedPlayer2.StunOtherPlayer(ref player1StunTurns);
                     }
                     else if (key == ConsoleKey.P)
                     {
-                        selectedPlayer1.PlaceRandomTrap(rand);
+                        selectedPlayer2.PlaceRandomTrap(rand);
                     }
                     else
                     {
-                        if (key == ConsoleKey.W && player1Y > 0 && maze[player1Y - 1, player1X] == 0) player1Y--;
-                        if (key == ConsoleKey.S && player1Y < height - 1 && maze[player1Y + 1, player1X] == 0) player1Y++;
-                        if (key == ConsoleKey.A && player1X > 0 && maze[player1Y, player1X - 1] == 0) player1X--;
-                        if (key == ConsoleKey.D && player1X < width - 1 && maze[player1Y, player1X + 1] == 0) player1X++;
+                        if (key == ConsoleKey.W && player2Y > 0 && maze[player2Y - 1, player2X] == 0) player2Y--;
+                        if (key == ConsoleKey.S && player2Y < height - 1 && maze[player2Y + 1, player2X] == 0) player2Y++;
+                        if (key == ConsoleKey.A && player2X > 0 && maze[player2Y, player2X - 1] == 0) player2X--;
+                        if (key == ConsoleKey.D && player2X < width - 1 && maze[player2Y, player2X + 1] == 0) player2X++;
                     }
-                  Trap.ActivateTrap(ref player1X, ref player1Y, ref player2X, ref player2Y, rand, selectedPlayer1); // Actualizar esta línea
-
-
+                    Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2); // Actualizar esta línea
                 }
             }
-            else // Turno del Jugador 2
+            else if (turns % 2 != 0) // Jugador 2 controlado por la IA
             {
-                if (!isAIPlayer2) // Jugador 2 humano
+                if (player2StunTurns == 0)
                 {
-                    if (player2StunTurns == 0) // Verifica si el jugador 2 no está aturdido
+                   
+                    // Movimiento de la IA 
+                    if (isAIPlayer2)
                     {
-                        var key = Console.ReadKey(true).Key;
-
-                        if (key == ConsoleKey.T)
-                        {
-                            selectedPlayer2.TeleportTowardsExit(ref player2X, ref player2Y, width - 2, height - 2);
-                        }
-                        else if (key == ConsoleKey.B)
-                        {
-                            selectedPlayer2.SwapPositions(ref player2X, ref player2Y, ref player1X, ref player1Y);
-                        }
-                        else if (key == ConsoleKey.R)
-                        {
-                            selectedPlayer2.StunOtherPlayer(ref player1StunTurns);
-                        }
-                        else if (key == ConsoleKey.P)
-                        {
-                            selectedPlayer2.PlaceRandomTrap(rand);
-                        }
-                        else
-                        {
-                            if (key == ConsoleKey.W && player2Y > 0 && maze[player2Y - 1, player2X] == 0) player2Y--;
-                            if (key == ConsoleKey.S && player2Y < height - 1 && maze[player2Y + 1, player2X] == 0) player2Y++;
-                            if (key == ConsoleKey.A && player2X > 0 && maze[player2Y, player2X - 1] == 0) player2X--;
-                            if (key == ConsoleKey.D && player2X < width - 1 && maze[player2Y, player2X + 1] == 0) player2X++;
-                        }
-                       Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2); // Actualizar esta línea
-                    }
-                }
-                else if ( turns % 2 != 0)// Jugador 2 controlado por la IA
-                {
-                    if (player2StunTurns == 0)
-                    {
-                        Logica.MoveAIPlayerTowardsExit(ref player2X, ref player2Y, width -1, height -1);
-                        Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2);
+                        Logica.MoveAIPlayerTowardsExit(ref player2X, ref player2Y);              
+                         Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2); // Actualizar esta línea
+                    if (Math.Abs(player2X - (width - 2)) + Math.Abs(player2Y - (height - 2)) == 1)
+                     {
+                         player2X = width - 2;
+                         player2Y = height - 2;
+                     }
                     }
                 }
             }
-
-            if (player1X == width - 2 && player1Y == height - 2)
-            {
-              /*  StopSound(); // Detener la música del juego 
-                PlaySound(@"E:\maze en consola\sounds\sound_victory.wav");*/
-                Console.Clear();
-                AnsiConsole.MarkupLine("[yellow bold]******[/]");
-                AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
-                AnsiConsole.MarkupLine("[yellow bold]*[/] [green bold] ¡Jugador 1 gana! [/][yellow bold]*[/]");
-                AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
-                AnsiConsole.MarkupLine("[yellow bold]******[/]");
-                AnsiConsole.Write(new FigletText("¡Victoria!").Color(Color.Yellow).Centered());
-                AnsiConsole.Markup("\n[bold green]¡Jugador 1 ha encontrado la salida del laberinto![/]\n");
-                AnsiConsole.Markup("[bold cyan]¡Eres un verdadero maestro explorador![/]");
-                ShowVictoryStory(selectedPlayer1);
-                break;
-            }
-
-            if (player2X == width - 2 && player2Y == height - 2)
-            {
-             /*   StopSound(); // Detener la música del juego 
-                PlaySound(@"E:\maze en consola\sounds\sound_victory.wav");*/
-                Console.Clear();
-                AnsiConsole.MarkupLine("[yellow bold]******[/]");
-                AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
-                AnsiConsole.MarkupLine("[yellow bold]*[/] [green bold] ¡Jugador 2 gana! [/][yellow bold]*[/]");
-                AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
-                AnsiConsole.MarkupLine("[yellow bold]******[/]");
-                AnsiConsole.Write(new FigletText("¡Victoria!").Color(Color.Yellow).Centered());
-                AnsiConsole.Markup("\n[bold green]¡Jugador 2 ha encontrado la salida del laberinto![/]\n");
-                AnsiConsole.Markup("[bold cyan]¡Eres un verdadero maestro explorador![/]");
-                ShowVictoryStory(selectedPlayer2);
-                break;
-            }
-
-            turns++;
         }
+
+        if (player1X == width - 2 && player1Y == height - 2)
+        {
+            /* StopSound(); // Detener la música del juego 
+            PlaySound(@"E:\maze en consola\sounds\sound_victory.wav");*/
+            Console.Clear();
+            AnsiConsole.MarkupLine("[yellow bold]******[/]");
+            AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
+            AnsiConsole.MarkupLine("[yellow bold]*[/] [green bold] ¡Jugador 1 gana! [/][yellow bold]*[/]");
+            AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
+            AnsiConsole.MarkupLine("[yellow bold]******[/]");
+            AnsiConsole.Write(new FigletText("¡Victoria!").Color(Color.Yellow).Centered());
+            AnsiConsole.Markup("\n[bold green]¡Jugador 1 ha encontrado la salida del laberinto![/]\n");
+            AnsiConsole.Markup("[bold cyan]¡Eres un verdadero maestro explorador![/]");
+            ShowVictoryStory(selectedPlayer1);
+            break;
+        }
+
+        if (player2X == width - 2 && player2Y == height - 2)
+        {
+            /* StopSound(); // Detener la música del juego 
+            PlaySound(@"E:\maze en consola\sounds\sound_victory.wav");*/
+            Console.Clear();
+            AnsiConsole.MarkupLine("[yellow bold]******[/]");
+            AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
+            AnsiConsole.MarkupLine("[yellow bold]*[/] [green bold] ¡Jugador 2 gana! [/][yellow bold]*[/]");
+            AnsiConsole.MarkupLine("[yellow bold]*                            *[/]");
+            AnsiConsole.MarkupLine("[yellow bold]******[/]");
+            AnsiConsole.Write(new FigletText("¡Victoria!").Color(Color.Yellow).Centered());
+            AnsiConsole.Markup("\n[bold green]¡Jugador 2 ha encontrado la salida del laberinto![/]\n");
+            AnsiConsole.Markup("[bold cyan]¡Eres un verdadero maestro explorador![/]");
+            ShowVictoryStory(selectedPlayer2);
+            break;
+        }
+
+        turns++;
     }
+}
+
 static bool IsNearExit(int x, int y, int minDistance) 
    { 
     int exitX = width - 2;
