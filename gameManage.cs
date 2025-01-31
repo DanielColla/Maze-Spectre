@@ -38,16 +38,17 @@ public static List<Trap> knockbackTraps = new List<Trap>();
         ShowAdventureStory();
         do
         {
-            Logica.InitializeMaze();
+            Logica.InitializeMaze();// Inicializa el laberinto
            
-            Logica.GenerateMaze(1, 1);
-        } while (!Logica.IsSolvable());
+            Logica.GenerateMaze(1, 1);// Genera el laberinto con algoritmo recursivo
+        } while (!Logica.IsSolvable()); // Asegura que el laberinto sea solucionable
 
-        Logica.PlaceTraps();
-        Logica.PlaceSwapTraps();
-        Logica.PlaceKnockbackTraps();
-        StartGame();
+        Logica.PlaceTraps();// Coloca trampas en el laberinto
+        Logica.PlaceSwapTraps();// Coloca trampas de intercambio
+        Logica.PlaceKnockbackTraps();// Coloca trampas de retroceso
+        StartGame(); // Inicia el juego
     }
+     // Permite seleccionar los jugadores antes de empezar el juego
 static void ShowPlayerSelectionMenu()
 {
   //  PlaySound(@"E:\maze en consola\sounds\sound_main_menu.wav");
@@ -87,13 +88,13 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
     }
     else
     {
-        selectedPlayer2 = new Player("IA", "Controlado por un spiritu maligno", "Jugador controlado por un spiritu , el jugador se mueve dos casillas.");
+        selectedPlayer2 = new Player("IA", " el jugador se mueve dos casillas al final del recorrido.", "Jugador controlado por un spiritu maligno del laberinto .");
         AnsiConsole.Write(new Panel($"Segundo jugador: [bold blue]{selectedPlayer2.Name}[/]\n{selectedPlayer2.PowerDescription}")
             .Border(BoxBorder.Double).BorderColor(Color.Grey).Header("[bold blue]Jugador 2[/]"));
     }
 }
 
-    static void ShowAdventureStory()
+    static void ShowAdventureStory() // Muestra una historia antes de iniciar el juego
     {
         AnsiConsole.Write(new FigletText("La Aventura Comienza").Color(Color.Green).Centered());
 
@@ -102,7 +103,7 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
                        "Juntos, enfrentaron los peligros del laberinto y desafiaron las trampas que encontraban a su paso, en busca de la salida y la gloria.";
 
         string[] storyLines = story.Split('\n');
-
+//efecto narrador
         foreach (string line in storyLines)
         {
             foreach (char c in line)
@@ -125,7 +126,7 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
         Thread.Sleep(2000);
     }
 
-    static void ShowVictoryStory(Player winner)
+    static void ShowVictoryStory(Player winner)  // Muestra una historia de victoria al finalizar el juego
     {
         string victoryStory = $"Después de muchos desafíos, {winner.Name} finalmente encontró la salida del laberinto. \n\n" +
                               $"{winner.Story}\n\n" +
@@ -155,7 +156,7 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
         if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter) return;
     }
 
-   static void StartGame()
+   static void StartGame() // Maneja el bucle principal del juego y la lógica de los turnos
 {
     /* StopSound(); // Detener la música del menú 
     PlaySound(@"E:\maze en consola\sounds\sound_game.wav");*/
@@ -165,23 +166,23 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
     // Definir la distancia mínima a la salida
     int minDistanceToExit = 3;
 
-    do
+    do // coloca l jugador uno en una posicion aleatoria
     {
         player1X = rand.Next(1, width - 1);
         player1Y = rand.Next(1, height - 1);
     } while (maze[player1Y, player1X] != 0 || IsNearExit(player1X, player1Y, minDistanceToExit));
 
-    do
+    do  // coloca 2 jugador uno en una posicion aleatoria
     {
         player2X = rand.Next(1, width - 1);
         player2Y = rand.Next(1, height - 1);
     } while (maze[player2Y, player2X] != 0 || (player2X == player1X && player2Y == player1Y) || IsNearExit(player2X, player2Y, minDistanceToExit));
 
-    int turns = 0;
+    int turns = 0; //contador de turnos
     while (true)
     {
         Console.Clear();
-        PrintMazeWithPlayers(player1X, player1Y, player2X, player2Y);
+        PrintMazeWithPlayers(player1X, player1Y, player2X, player2Y); //imprime el tablero con los dos jugadores
 
         if (player1StunTurns > 0) player1StunTurns--;
         if (player2StunTurns > 0) player2StunTurns--;
@@ -309,14 +310,14 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
         turns++;
     }
 }
-
+ // Determina si una posición está cerca de la salida
 static bool IsNearExit(int x, int y, int minDistance) 
    { 
     int exitX = width - 2;
     int exitY = height - 2; 
         return Math.Abs(x - exitX) < minDistance && Math.Abs(y - exitY) < minDistance;
      }
-    static void PrintMazeWithPlayers(int player1X, int player1Y, int player2X, int player2Y)
+    static void PrintMazeWithPlayers(int player1X, int player1Y, int player2X, int player2Y) // Imprime el laberinto en la consola con los jugadores y las trampas
     {
         AnsiConsole.Write(new FigletText("Laberinto del Juego").Color(Color.Aqua).Centered());
 
@@ -343,8 +344,8 @@ static bool IsNearExit(int x, int y, int minDistance)
                 row.Add(new Markup("[bold magenta]T[/]")); // Trampa normal
                 else if (swapTraps.Exists(t => t.Position == (j, i)))
                     row.Add(new Markup("[bold cyan]X[/]")); // Trampa de cambio de posición
-                else if (knockbackTraps.Exists(t => t.Position == (j, i))) // Añade esta línea
-                    row.Add(new Markup("[bold red]K[/]")); // Añade esta línea
+                else if (knockbackTraps.Exists(t => t.Position == (j, i))) //trampa de retroceso
+                    row.Add(new Markup("[bold red]K[/]")); //trampa de retroceso
 
                 else if (maze[i, j] == 1)
                     row.Add(new Markup("[red]█[/]")); // Pared
@@ -378,7 +379,7 @@ static bool IsNearExit(int x, int y, int minDistance)
                 new Panel(storiesTable).Header("Historias").BorderColor(Color.Silver)
             ));
     }
-
+ // Retorna la tecla asociada con la habilidad de un jugador específico
    static string GetPowerKey(string playerName)
 {
     return playerName switch

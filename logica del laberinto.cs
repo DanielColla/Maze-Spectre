@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 class Logica
 {
+     // Variables globales que toman valores desde GameManager
     public static int width = GameManager.width;
     public static int height = GameManager.height;
     public static int[,] maze = GameManager.maze;
@@ -10,39 +11,43 @@ class Logica
     public static List<Trap> swapTraps = GameManager.swapTraps;
     public static List<Trap> knockbackTraps = GameManager.knockbackTraps;
 
+    // Inicializa el laberinto llenándolo completamente de paredes (valor 1)
     public static void InitializeMaze()
     {
-        for (int i = 0; i < height; i++)
-            for (int j = 0; j < width; j++)
-                maze[i, j] = 1;
+        for (int i = 0; i < height; i++) // Recorre cada fila
+            for (int j = 0; j < width; j++) // Recorre cada columna en la fila actual
+                maze[i, j] = 1; // Asigna 1 (pared) a cada celda
     }
-
+    // Genera un laberinto aleatorio utilizando el algoritmo de Prim
     public static void GenerateMaze(int startX, int startY)
     {
-        maze[startY, startX] = 0;
+         // Se marca el punto inicial como camino
+        maze[startY, startX] = 0; // Punto de inicio del laberinto
         HashSet<(int x, int y)> walls = new HashSet<(int x, int y)>();
         AddWalls(startX, startY, walls);
 
         Random rand = new Random();
 
-        while (walls.Count > 0)
+        while (walls.Count > 0) // Mientras haya paredes candidatas, seguimos generando camino
         {
             var wallList = new List<(int x, int y)>(walls);
-            var wall = wallList[rand.Next(walls.Count)];
+            var wall = wallList[rand.Next(walls.Count)]; // Selecciona una pared al azar
             walls.Remove(wall);
-
-            if (CountAdjacentPaths(wall.x, wall.y) == 1)
+            // Si la pared tiene un solo camino adyacente, se convierte en camino
+            if (CountAdjacentPaths(wall.x, wall.y) == 1) // Asegura solo una conexión
             {
-                maze[wall.y, wall.x] = 0;
-                AddWalls(wall.x, wall.y, walls);
+                maze[wall.y, wall.x] = 0; // Convierte la pared en un camino
+                AddWalls(wall.x, wall.y, walls); // Agrega nuevas paredes al conjunto
             }
         }
 
+        // Asegura que la salida sea accesible
         maze[height - 2, width - 2] = 0;
         maze[height - 3, width - 2] = 0;
         maze[height - 2, width - 3] = 0;
     }
 
+    // Agrega paredes adyacentes a una celda para ser consideradas en la generación del laberinto
     public static void AddWalls(int x, int y, HashSet<(int x, int y)> walls)
     {
         foreach (var direction in new[] { (2, 0), (-2, 0), (0, 2), (0, -2) })
@@ -57,6 +62,7 @@ class Logica
         }
     }
 
+    // Cuenta cuántos caminos existen alrededor de una celda
     public static int CountAdjacentPaths(int x, int y)
     {
         int count = 0;
@@ -69,13 +75,13 @@ class Logica
         }
         return count;
     }
-
+      // Verifica si una celda está dentro de los límites del laberinto
     public static bool IsInBounds(int x, int y) => x > 0 && x < width - 1 && y > 0 && y < height - 1;
-
+     // Coloca trampas aleatorias en el laberinto
     public static void PlaceTraps()
     {
         Random rand = new Random();
-        int trapCount = rand.Next(3, 5);
+        int trapCount = rand.Next(3, 5); // Número aleatorio de trampas entre 3 y 5
 
         for (int i = 0; i < trapCount; i++)
         {
@@ -108,12 +114,7 @@ class Logica
         }
     }
 
- 
-
-
-
-
-public static void PlaceKnockbackTraps() // Añade esta función
+public static void PlaceKnockbackTraps() // coloca las trampas de retroceso
 {
     Random rand = new Random();
     int trapCount = 2;
@@ -131,8 +132,7 @@ public static void PlaceKnockbackTraps() // Añade esta función
     }
 }
 
-
-
+// Algoritmo de búsqueda A* para encontrar la mejor ruta
     public static void MoveAIPlayerTowardsExit(ref int playerX, ref int playerY)
     {
         var path = FindPath(playerX, playerY, width - 2, height - 2);
@@ -146,13 +146,13 @@ public static void PlaceKnockbackTraps() // Añade esta función
 
     public static List<(int, int)> FindPath(int startX, int startY, int goalX, int goalY)
     {
-        var openSet = new List<(int x, int y)>();
-        var cameFrom = new Dictionary<(int, int), (int, int)>();
+        var openSet = new List<(int x, int y)>();// Lista de nodos por explorar
+        var cameFrom = new Dictionary<(int, int), (int, int)>();//ruta optima
         var gScore = new Dictionary<(int, int), int> { [(startX, startY)] = 0 };
         var fScore = new Dictionary<(int, int), int> { [(startX, startY)] = Heuristic(startX, startY, goalX, goalY) };
 
         openSet.Add((startX, startY));
-
+        // Seleccionamos el nodo con menor costo fScore
         while (openSet.Count > 0)
         {
             var current = openSet[0];
@@ -164,7 +164,7 @@ public static void PlaceKnockbackTraps() // Añade esta función
                     current = openSet[i];
                 }
             }
-
+           // Si llegamos al objetivo, reconstruimos el camino
             if (current.x == goalX && current.y == goalY)
             {
                 var path = new List<(int, int)>();
@@ -179,11 +179,11 @@ public static void PlaceKnockbackTraps() // Añade esta función
             }
 
             openSet.Remove(current);
-
+// Explorar vecinos (arriba, abajo, izquierda, derecha)
             foreach (var direction in new[] { (-1, 0), (1, 0), (0, -1), (0, 1) })
             {
                 var neighbor = (x: current.x + direction.Item1, y: current.y + direction.Item2);
-
+// Si el vecino está fuera del laberinto o es una pared, lo ignoramos
                 if (!IsInBounds(neighbor.x, neighbor.y) || maze[neighbor.y, neighbor.x] != 0)
                     continue;
 
@@ -204,7 +204,7 @@ public static void PlaceKnockbackTraps() // Añade esta función
 
         return null!; // No path found
     }
- 
+  // Heurística de Manhattan para A*
     public static int Heuristic(int x1, int y1, int x2, int y2)
     {
         return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
