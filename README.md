@@ -49,7 +49,7 @@ Controla la lógica principal del juego, incluyendo la gestión de turnos y la v
 #### ⚙️ Funcionalidades principales:  
 - **Gestor de turnos** ⏳: Alterna entre los jugadores, permitiendo que cada uno realice una acción por turno.  
 - **Condición de victoria** 🏆: El juego finaliza cuando un jugador alcanza la salida del laberinto.  
-- **Balance de la IA** 🤖: La IA recibe un turno extra al final para equilibrar la falta de habilidades.  
+   
 
 ---
 
@@ -59,7 +59,7 @@ Define el comportamiento de la inteligencia artificial del juego.
 #### 🤖 Características de la IA:  
 - **Algoritmo A*** 🔍: La IA encuentra el camino más corto hasta la salida.  
 - **Estrategia de movimiento** 🏃: Evita trampas y busca la ruta óptima según su heurística.  
-- **Turno extra** ⏳: Al final del juego, la IA se mueve dos veces para balancear la dificultad.  
+
 
 ---
 
