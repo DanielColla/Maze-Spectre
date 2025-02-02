@@ -136,7 +136,7 @@ public static void PlaceKnockbackTraps() // coloca las trampas de retroceso
     public static void MoveAIPlayerTowardsExit(ref int playerX, ref int playerY)
     {
         var path = FindPath(playerX, playerY, width - 2, height - 2);
-        if (path != null && path.Count > 1)
+        if (path != null && path.Count > 0)
         {
             playerX = path[0].Item1;
             playerY = path[0].Item2;

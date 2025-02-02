@@ -263,11 +263,7 @@ AnsiConsole.Write(new Panel($"Segundo jugador seleccionado: [bold blue]{selected
                     {
                         Logica.MoveAIPlayerTowardsExit(ref player2X, ref player2Y);              
                          Trap.ActivateTrap(ref player2X, ref player2Y, ref player1X, ref player1Y, rand, selectedPlayer2); // Actualizar esta línea
-                    if (Math.Abs(player2X - (width - 2)) + Math.Abs(player2Y - (height - 2)) == 1)
-                     {
-                         player2X = width - 2;
-                         player2Y = height - 2;
-                     }
+                   
                     }
                 }
             }
